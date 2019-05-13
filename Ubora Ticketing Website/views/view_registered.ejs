@@ -1,0 +1,27 @@
+<%- include("partials/header"); -%>
+<div class="col-lg-8">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Year Group</th>
+      </tr>
+    </thead>
+    <tbody>
+  <% usersRegistered.forEach(function(user){%>
+    <tr>
+  <td><%=user.fname%></td>
+  <td><%=user.lname%></td>
+  <td><%=user.email%></td>
+  <td><%=user.yearGroup%></td>
+  <td><button type="button" name="button" class="btn">Delete</button></td>
+  <td><button type="button" name="button" class="btn">Send to Eventbrite</button></td>
+  </tr>
+  <%})%>
+  </tbody>
+  </table>
+</div>
+
+<%- include("partials/footer"); -%>

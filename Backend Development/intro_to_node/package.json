@@ -1,0 +1,15 @@
+{
+  "name": "intro_to_node",
+  "version": "1.0.0",
+  "description": "Intro to node project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yoofi",
+  "license": "ISC",
+  "dependencies": {
+    "superheroes": "^2.0.0",
+    "supervillains": "^2.2.0"
+  }
+}

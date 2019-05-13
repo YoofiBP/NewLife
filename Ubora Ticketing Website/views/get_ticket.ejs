@@ -1,0 +1,22 @@
+<%- include("partials/header"); -%>
+<form action="/get_ticket" method="post">
+  <div class="form-group">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameField" placeholder="Enter First Name">
+  </div>
+  <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameField" placeholder="Enter Last Name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailField" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">Preferably Gmail.</small>
+  </div>
+  <div class="form-group">
+    <label for="yearGroup">Year Group</label>
+    <input type="text" class="form-control" id="yearGroup" name="yearGroup" aria-describedby="ygField" placeholder="Enter Year Group">
+  </div>
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
+<%- include("partials/footer"); -%>

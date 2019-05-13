@@ -1,0 +1,22 @@
+{
+  "name": "ubora-website",
+  "version": "1.0.0",
+  "description": "A web application for the Ashesi Ubora Awards",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yoofi Brown-Pobee",
+  "license": "ISC",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "bootstrap": "^4.3.1",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "firebase": "^6.0.2",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.11",
+    "popper.js": "^1.15.0"
+  }
+}

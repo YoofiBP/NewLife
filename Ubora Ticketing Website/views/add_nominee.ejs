@@ -1,0 +1,31 @@
+<%- include("partials/header"); -%>
+
+<form action="/add_nominee" method="post">
+  <div class="form-group">
+    <label for="cat_name">Nominee Name</label>
+    <input type="text" class="form-control" id="nom_name" name="nom_name" aria-describedby="fnameField" placeholder="Enter Nominee Name">
+  </div>
+  <div class="form-group">
+    <label for="cat_descr">Nominee Major</label>
+    <input type="text" class="form-control" id="nom_major" name="nom_major" aria-describedby="lnameField" placeholder="Enter Nominee Major">
+  </div>
+  <div class="form-group">
+    <label for="cat_descr">Nominee Year Group</label>
+    <input type="text" class="form-control" id="nom_yg" name="nom_yg" aria-describedby="lnameField" placeholder="Enter Nominee Year Group">
+  </div>
+  <div class="form-group">
+    <label for="cat_image">Nominee Image</label>
+    <input type="file" class="form-control-file" id="nom_image" id="nom_image">
+  </div>
+  <div class="form-group">
+    <label for="nom_cat">Nominee Category</label>
+    <select name="nom_cat" id="">
+        <option value="0">Select Category</option>
+        <% categories.forEach(category=>{%>
+            <option value="<%=category.name%>"><%=category.name%></option>
+        <%})%>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
+<%- include("partials/footer"); -%>
