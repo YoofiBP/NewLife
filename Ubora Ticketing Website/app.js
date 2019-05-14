@@ -29,11 +29,11 @@ app.use(express.static('public'));
 
 app.get('/', function(req,res){
   res.render('index');
-})
+});
 
 app.get('/get_ticket', function(req,res){
   res.render('get_ticket');
-})
+});
 
 app.post('/get_ticket', function(req,res){
   let fname = req.body.fname;
@@ -48,7 +48,7 @@ app.post('/get_ticket', function(req,res){
     'email': email,
     'yearGroup': yearGroup
   }).then(res.redirect('/'));
-})
+});
 
 app.get('/view_registered', function(req,res){
   let users = [];
@@ -62,11 +62,11 @@ app.get('/view_registered', function(req,res){
   }).catch(err => {
     console.log('Error getting documents', err);
   });
-})
+});
 
 app.get('/add_cat', function(req,res){
   res.render('add_category');
-})
+});
 
 app.post('/add_cat', function(req,res){
   let cat_name = req.body.cat_name;
@@ -77,7 +77,7 @@ app.post('/add_cat', function(req,res){
     'name' : cat_name,
     'description' : cat_descr
   }).then(res.redirect('/'));
-})
+});
 
 app.get('/add_nominee', function(req,res){
   let firebaseCategories = [];
@@ -115,4 +115,4 @@ app.post('/add_nominee', function(req,res){
 
 app.listen(3000, function(){
   console.log("Server up and running on port 3000");
-})
+});
