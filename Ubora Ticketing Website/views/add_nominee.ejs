@@ -1,18 +1,22 @@
 <%- include("partials/header"); -%>
 
-<form action="/add_nominee" method="post" enctype="multipart/form-data">
+<form action="/add_nominee" method="post">
   <div class="form-group">
-    <label for="cat_name">Nominee Name</label>
+    <label for="nom_name">Nominee Name</label>
     <input type="text" class="form-control" id="nom_name" name="nom_name" aria-describedby="fnameField" placeholder="Enter Nominee Name">
   </div>
   <div class="form-group">
-    <label for="cat_descr">Nominee Major</label>
+    <label for="nom_major">Nominee Major</label>
     <input type="text" class="form-control" id="nom_major" name="nom_major" aria-describedby="lnameField" placeholder="Enter Nominee Major">
   </div>
   <div class="form-group">
-    <label for="cat_descr">Nominee Year Group</label>
+    <label for="nom_yg">Nominee Year Group</label>
     <input type="text" class="form-control" id="nom_yg" name="nom_yg" aria-describedby="lnameField" placeholder="Enter Nominee Year Group">
   </div>
+  <div class="form-group">
+      <label for="nom_descr">Nominee Description</label>
+      <textarea rows="5" class="form-control" id="nom_descr" name="nom_descr" aria-describedby="lnameField" placeholder="Enter Nominee Description"></textarea>
+    </div>
   <div class="form-group">
     <label for="cat_image">Nominee Image</label>
     <input type="file" class="form-control-file" id="nom_image" id="nom_image">

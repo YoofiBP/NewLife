@@ -98,6 +98,7 @@ app.post('/add_nominee', function(req,res){
   let nom_major = req.body.nom_major;
   let nom_yg = req.body.nom_yg;
   let nom_image = req.body.nom_image;
+  let nom_descr = req.body.nom_descr;
   let nom_cat = req.body.nom_cat;
   let today = new Date();
   let thisYear = today.getFullYear();
@@ -108,9 +109,10 @@ app.post('/add_nominee', function(req,res){
     'major' : nom_major,
     'year_group' : nom_yg,
     'image_source': "",
+    'description' : nom_descr,
     'category': nom_cat,
     'nom_year': thisYear
-  }).then(res.redirect('/'));
+  }).then(res.redirect('/view_nominees'));
 });
 
 app.get('/view_categories', function(req,res){
@@ -125,7 +127,21 @@ app.get('/view_categories', function(req,res){
   }).catch(err => {
     console.log('Error getting documents', err);
   });
-})
+});
+
+app.get('/view_nominees', function(req,res){
+  let nominees = [];
+  let nomineesRef = db.collection('nominees');
+  nomineesRef.get().then(snapshot => {
+    snapshot.forEach(doc => {
+      nominees.push(doc.data());
+    });
+    console.log(nominees);
+    res.render('view_nominees', {nomineesRegistered:nominees});
+  }).catch(err => {
+    console.log('Error getting documents', err);
+  });
+});
 
 app.listen(3000, function(){
   console.log("Server up and running on port 3000");
