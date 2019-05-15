@@ -76,7 +76,7 @@ app.post('/add_cat', function(req,res){
   newCat.set({
     'name' : cat_name,
     'description' : cat_descr
-  }).then(res.redirect('/'));
+  }).then(res.redirect('/view_categories'));
 });
 
 app.get('/add_nominee', function(req,res){
@@ -112,6 +112,20 @@ app.post('/add_nominee', function(req,res){
     'nom_year': thisYear
   }).then(res.redirect('/'));
 });
+
+app.get('/view_categories', function(req,res){
+  let categories = [];
+  let categoriesRef = db.collection('categories');
+  categoriesRef.get().then(snapshot => {
+    snapshot.forEach(doc => {
+      categories.push(doc.data());
+    });
+    console.log(categories);
+    res.render('view_categories', {categoriesRegistered:categories});
+  }).catch(err => {
+    console.log('Error getting documents', err);
+  });
+})
 
 app.listen(3000, function(){
   console.log("Server up and running on port 3000");

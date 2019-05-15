@@ -1,6 +1,6 @@
 <%- include("partials/header"); -%>
 
-<form action="/add_nominee" method="post">
+<form action="/add_nominee" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="cat_name">Nominee Name</label>
     <input type="text" class="form-control" id="nom_name" name="nom_name" aria-describedby="fnameField" placeholder="Enter Nominee Name">
