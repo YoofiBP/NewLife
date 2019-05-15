@@ -22,3 +22,9 @@ The web application uses Firebase for Authentication and Storage.
 * View Nominees From Current Year by Category
 * Give Specifications for Images to upload for best experience
 * Create your own barcode reader and attendance tracker (useability issues like what platform will the app run on and will it be a web browser)
+
+A potential solution to viewing nominees to the change how the data is stored rather. 
+In nominees datastore
+Store the name of the category and next the nominees inside the category as an array
+
+Or remove nominees altogether and store everything in category

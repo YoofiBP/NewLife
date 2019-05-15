@@ -136,6 +136,7 @@ app.get('/view_nominees', function(req,res){
     snapshot.forEach(doc => {
       nominees.push(doc.data());
     });
+    nominees.sort((a,b)=>(a.category > b.category) ? 1:-1);
     console.log(nominees);
     res.render('view_nominees', {nomineesRegistered:nominees});
   }).catch(err => {
