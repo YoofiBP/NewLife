@@ -31,3 +31,24 @@ It can be
 * Quadratic
 * Logarithmic
 * Nlog(N)
+
+# Sorting Algorithms
+Arranging data in ascending or descending order.
+
+## Bubble Sort
+Compares the elements one by one and sorts them based on their values
+
+Compare the first element with the second, if the first is greater than the second, swap. 
+
+Known as bubble sort because with every iteration the largest element in the given array bubbles up towards the last place
+
+Time complexity is O(n^2)
+Space Complexity  is 0(1)
+
+## Selection Sort
+Find the smallest array, swap it with the element in the first position. Find the second smallest and swap it with the element in the second position
+
+Time complexity is O(n^2)
+Space Complexity is O(1)
+
+## Insertion Sort
