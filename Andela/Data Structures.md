@@ -1,4 +1,4 @@
-#Data Structures and Algorithms Prep
+# Data Structures and Algorithms Prep
 
 Definition
 Data Structures represent ways of organising and storing data for operations to be applied on the data in the most efficient and effective manner
@@ -14,13 +14,13 @@ There are three types of asymptotic notations
 * Big O: This represents the worst case scenario for the time complexity of an algorithm. It will not go beyond this point
 * Big Omega: This represents the best case scenario for the time complexity of an algorithm. It will no get better than this
 
-##Space Complexity
+## Space Complexity
 Generally when we are computing space complexity, we focus on the data space taken by the algorithm and discard the enviromental and instructions space. Data space is the amount of space used by the variables and constants. 
 
 To calculate space complexity, we refer to a table of the size of each type of data variable.
 We calculate based on the number of variables present and use this to compute the complexity
 
-##Time Complexity
+## Time Complexity
 This is the total time required by a program to run till its completion
 
 It is commonly estimated by counting the number of elementary steps performed by any algorithm to finish execution. 
