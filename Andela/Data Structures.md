@@ -92,9 +92,9 @@ Not stable though
 ## Heap Sort
 You create a heap from the unsorted list, remove the first element and put into your new array, rebuild the heap and repeat the steps
 
-Worst Case: O(n*log n)
-Best Case: O(n*log n)
-Space Complexity: O(1)
+* Worst Case: O(n*log n)
+* Best Case: O(n*log n)
+* Space Complexity: O(1)
 
 Not Stable
 Very Fast
@@ -104,8 +104,40 @@ Very Fast
 Traverse the array from the start until the desired element is found.  Cool for when there are few elements in the list
 
 ### Features
-Used for unsorted small lists
-Has time complexity of O(n)
+* Used for unsorted small lists
+* Has time complexity of O(n)
 
 
 ## Binary Search
+We start by comparing with the middle element. If the element to be searched is that middle element we return it, else, we check if the element to be searched is greater or less than the middle. If greater, we check the right sub array and the opposite for the lesser case
+
+### Features
+* Great for large sorted arrays
+* Complexity of O(log n)
+
+# Data Structures
+
+## Stacks
+Last In First Out. Element enters from the TOP and comes out the TOP
+
+push() and pop()
+
+### Applications
+Used for reversing words and parsing
+
+### Analysis of Operations
+* Push O(1)
+* Pop O(1)
+* Top O(1)
+* Search O(n)
+
+## Queues
+First in First Out.
+
+Element enters through the rear and comes our the front
+
+### Applications
+* Sharing a printer resource
+* Call center phones
+* Handling interrupts
+
