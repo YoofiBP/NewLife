@@ -141,3 +141,16 @@ Element enters through the rear and comes our the front
 * Call center phones
 * Handling interrupts
 
+When you remove an element from the front, you can either change the HEAD pointer or move all the elements over
+
+### Analysis of Operations
+* Enqueue: O(1)
+* Dequeue: O(1)
+* Size: O(1)
+
+## Circular Queues
+A linear queue with a head and tail marker than moves. When you add an element, the tail marker is moved to the next slot. When you remove an element, the element is not actually removed but the head marker moves to the next element. Therefore the queue is essentially what is between the markers
+
+## Applications
+* Computer controlled traffic signal system
+* CPU scheduling and memory management
