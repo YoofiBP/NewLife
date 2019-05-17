@@ -70,6 +70,42 @@ Divide and Conquer, divide the problem into smaller sub problems to make them ea
 
 Divide an unsorted array into sub arrays of one element each and repeatedly merge to produce sorted subarrays until one complete array is produced.
 
+Keep dividing till you are down to units, then start merging. You mark the beginning, end and middle
 
+Its a stable sort
+Best for linked lists
 
 Time Complexity is O(n*logn)
+Space complexity is O(n)
+
+## Quick Sort
+Also based on divide and conquer. Differs from merge sort in that more work is done dividing than merging.
+
+What you do is you select some index as your pivot, you arrange all values less than the pivot to its left and all values greater than the pivot to its right. Then you take all values before the first selected pivot as a sub array, then you perform the same actions (partioning) on that array till you are left with an array of one element 
+
+Worst Case Time Complexity is O(n2). If the array is unbalance and there is nothing on one side, then it is essentially like sorting a regular array
+
+Best Case Time complexity is O(n*log n) If its almost equal then its better
+
+Not stable though
+
+## Heap Sort
+You create a heap from the unsorted list, remove the first element and put into your new array, rebuild the heap and repeat the steps
+
+Worst Case: O(n*log n)
+Best Case: O(n*log n)
+Space Complexity: O(1)
+
+Not Stable
+Very Fast
+
+# Searching Algorithms
+## Linear Search
+Traverse the array from the start until the desired element is found.  Cool for when there are few elements in the list
+
+### Features
+Used for unsorted small lists
+Has time complexity of O(n)
+
+
+## Binary Search
