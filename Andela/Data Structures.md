@@ -52,3 +52,24 @@ Time complexity is O(n^2)
 Space Complexity is O(1)
 
 ## Insertion Sort
+You start at index 1, and for each element at the index, you have to place it at the right position in reference to the sorted sub array before it. So basically you are checking where each element belongs, whether greater or smaller than the preceding array
+
+### Characteristics
+* Efficient for smaller data sets but very inefficient for large ones
+* It is more efficient when a partially sorted array is provided as input
+* Better than selection and bubble sort. 
+* Does not change relative order of elements which are equal. Its stable in this way
+
+You pick a key (first element), iterate over the elements to the left of the key to find a position to put it in
+
+Time complexity is O(n^2)
+Space complexity is O(1)
+
+## Merge Sort
+Divide and Conquer, divide the problem into smaller sub problems to make them easier.
+
+Divide an unsorted array into sub arrays of one element each and repeatedly merge to produce sorted subarrays until one complete array is produced.
+
+
+
+Time Complexity is O(n*logn)
