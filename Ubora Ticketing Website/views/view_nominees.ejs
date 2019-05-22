@@ -1,32 +1,17 @@
 <%- include("partials/header"); -%>
-<p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" id="Entrepreneurial Spirit" aria-controls="multiCollapseExample1">Toggle first element</a>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
-</p>
-<script>document.getElementById("btn-primary")</script>
 <div class="row no-gutters">
-  <% document.getElementsByClassName("btn-primary").addEventListener("click", function(){%>
-    <%let currentCategory = []%>
-    <%let cateo = this.id%>
-    <% nomineesRegistered.forEach(function(nominee){%>
-      <%if(nominee.category == cateo){%>
-        <%currentCategory.push(nominee);%>
-    <%}%>
-  <%});%>
-  <%currentCategory.forEach(function(cat){%>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card nom_card">
-                <img class="card-img-top nominee-image" src="/img/Profile-512.png" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title" id="nom_name"><%=cat.name%></h5>
-                  <p id="nom_major">Major: <%=cat.major%></p>
-                  <p id="nom_yg">Year Group: <%=cat.year_group%></p>
-                  <p id="nom_descr" class="card-text"><%=cat.description%></p>
-                </div>
-              </div>
-</div>
-    <%})%>
+        <% nomineesRegistered.forEach(function(nominee){%>
+    <div class="col-lg-3">
+            <div class="card nom_card">
+                    <img class="card-img-top nominee-image" src="/img/Profile-512.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title"><%=nominee.name%></h5>
+                      <p>Major: <%=nominee.major%></p>
+                      <p>Year Group: <%=nominee.year_group%></p>
+                      <p class="card-text"><%=nominee.description%></p>
+                    </div>
+                  </div>
+    </div>
     <%})%>
 </div>
 <%- include("partials/footer"); -%>

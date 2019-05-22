@@ -5,10 +5,12 @@ const ejs = require('ejs');
 const jquery = require('jquery');
 const bodyParser = require('body-parser');
 const app = express();
+const mongoose = require('mongoose');
 
 const firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/firestore');
+require('firebase/database');
 
 firebase.initializeApp({
 apiKey: process.env.API_KEY,
@@ -19,6 +21,22 @@ storageBucket: process.env.STORAGE_BUCKET,
 messagingSenderId: process.env.MESSAGING_SENDER_ID,
 appId: process.env.APP_ID
 });
+
+mongoose.connect("mongodb://localhost:27017/uboraDB", { useNewUrlParser: true });
+
+const CategorySchema = new mongoose.Schema({
+  name: String,
+  description: String,
+  nominees: [{
+    name: String, 
+    year_group: String, 
+    major: String,
+    image_source: String,
+    description: String
+  }]
+});
+
+const Category = new mongoose.model('Category', CategorySchema);
 
 let db = firebase.firestore();
 
@@ -72,11 +90,23 @@ app.post('/add_cat', function(req,res){
   let cat_name = req.body.cat_name;
   let cat_descr = req.body.cat_descr;
 
-  let newCat = db.collection('categories').doc(cat_name);
+  /*let newCat = db.collection('categories').doc(cat_name);
   newCat.set({
     'name' : cat_name,
     'description' : cat_descr
-  }).then(res.redirect('/view_categories'));
+  }).then(res.redirect('/view_categories'));*/
+  const category = new Category({
+    name: cat_name,
+    description: cat_descr
+  });
+
+  category.save(function(err, product){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/view_categories');
+    }
+  });
 });
 
 app.get('/add_nominee', function(req,res){
@@ -102,7 +132,7 @@ app.post('/add_nominee', function(req,res){
   let nom_cat = req.body.nom_cat;
   let today = new Date();
   let thisYear = today.getFullYear();
-
+  /*
   let newNom = db.collection('nominees').doc(nom_name);
   newNom.set({
     'name' : nom_name,
@@ -112,12 +142,27 @@ app.post('/add_nominee', function(req,res){
     'description' : nom_descr,
     'category': nom_cat,
     'nom_year': thisYear
+  }).then(res.redirect('/view_nominees'));*/
+
+  firebase.database().ref('categories/'+nom_cat+'/nominees').set({
+    'name' : nom_name,
+    'major' : nom_major,
+    'year_group' : nom_yg,
+    'image_source': "",
+    'description' : nom_descr,
+    'nom_year': thisYear
   }).then(res.redirect('/view_nominees'));
 });
 
 app.get('/view_categories', function(req,res){
   let categories = [];
-  let categoriesRef = db.collection('categories');
+  Category.find(function(err, categories){
+    if(err){
+      console.log(err);
+    }else{
+      res.render('view_categories', {categoriesRegistered:categories});
+  }});
+  /*let categoriesRef = db.collection('categories');
   categoriesRef.get().then(snapshot => {
     snapshot.forEach(doc => {
       categories.push(doc.data());
@@ -126,7 +171,7 @@ app.get('/view_categories', function(req,res){
     res.render('view_categories', {categoriesRegistered:categories});
   }).catch(err => {
     console.log('Error getting documents', err);
-  });
+  });*/
 });
 
 app.get('/view_nominees', function(req,res){

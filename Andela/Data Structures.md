@@ -46,7 +46,7 @@ Time complexity is O(n^2)
 Space Complexity  is 0(1)
 
 ## Selection Sort
-Find the smallest array, swap it with the element in the first position. Find the second smallest and swap it with the element in the second position
+Find the smallest element, swap it with the element in the first position. Find the second smallest and swap it with the element in the second position
 
 Time complexity is O(n^2)
 Space Complexity is O(1)
@@ -149,7 +149,9 @@ When you remove an element from the front, you can either change the HEAD pointe
 * Size: O(1)
 
 ## Circular Queues
-A linear queue with a head and tail marker than moves. When you add an element, the tail marker is moved to the next slot. When you remove an element, the element is not actually removed but the head marker moves to the next element. Therefore the queue is essentially what is between the markers
+A linear data structure with a head and tail marker than moves. When you add an element, the tail marker is moved to the next slot. When you remove an element, the element is not actually removed but the head marker moves to the next element. Therefore the queue is essentially what is between the markers. If you get to the end you reset the markers to start for the beginning using the modulus function.
+
+This solves the problem of needing to reset a linear queue once its full. 
 
 ## Applications
 * Computer controlled traffic signal system

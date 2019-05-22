@@ -2,7 +2,7 @@ Arguments:
   /usr/local/bin/node /usr/share/yarn/bin/yarn.js add dotenv
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+  /home/elementary/Downloads/mongodb-linux-x86_64-ubuntu1804-4.0.8/bin:/home/elementary/.rbenv/plugins/ruby-build/bin:/home/elementary/.rbenv/shims:/home/elementary/.rbenv/bin:/home/elementary/.local/share/umake/bin:/home/elementary/bin:/home/elementary/.local/bin:/home/elementary/Downloads/mongodb-linux-x86_64-ubuntu1804-4.0.8/bin:/home/elementary/anaconda3/bin:/home/elementary/.rbenv/plugins/ruby-build/bin:/home/elementary/.rbenv/shims:/home/elementary/.rbenv/bin:/home/elementary/.local/share/umake/bin:/home/elementary/bin:/home/elementary/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/elementary/.rvm/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/user_directory/Android/Sdk/tools:/home/user_directory/Android/Sdk/platform-tools:/home/elementary/.rvm/bin:/home/elementary/.rvm/bin:/home/user_directory/Android/Sdk/tools:/home/user_directory/Android/Sdk/platform-tools:/home/elementary/.rvm/bin
 
 Yarn version: 
   1.12.3
@@ -14,8 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:56:26)
+  Error: EACCES: permission denied, mkdir '/home/elementary/CYL/Web Development Bootcamp/Ubora Ticketing Website/node_modules/@grpc/proto-loader/node_modules'
 
 npm manifest: 
   {
@@ -37,6 +36,7 @@ npm manifest:
       "firebase": "^6.0.2",
       "jquery": "^3.4.1",
       "lodash": "^4.17.11",
+      "mongoose": "^5.5.10",
       "popper.js": "^1.15.0"
     }
   }
