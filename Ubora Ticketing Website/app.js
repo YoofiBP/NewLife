@@ -206,6 +206,10 @@ app.get('/view_nominees', function(req,res){
   });*/
 });
 
+app.get('/edit_info', function(req,res){
+  res.render('edit_info');
+})
+
 app.listen(3000, function(){
   console.log("Server up and running on port 3000");
 });
