@@ -1,17 +1,24 @@
 <%- include("partials/header"); -%>
-<div class="row no-gutters">
-        <% nomineesRegistered.forEach(function(nominee){%>
-    <div class="col-lg-3">
-            <div class="card nom_card">
-                    <img class="card-img-top nominee-image" src="/img/Profile-512.png" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title"><%=nominee.name%></h5>
-                      <p>Major: <%=nominee.major%></p>
-                      <p>Year Group: <%=nominee.year_group%></p>
-                      <p class="card-text"><%=nominee.description%></p>
-                    </div>
-                  </div>
-    </div>
+        <% nomineesRegistered.forEach(function(category){%>
+          <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="display-3"><%=category.name%></h1>
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <%category.nominees.forEach(function(nominee){%>
+              <div class="col-lg-3">
+                  <div class="card nom_card">
+                          <img class="card-img-top nominee-image" src="/img/Profile-512.png" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title"><%=nominee.name%></h5>
+                            <p>Major: <%=nominee.major%></p>
+                            <p>Year Group: <%=nominee.year_group%></p>
+                            <p class="card-text"><%=nominee.description%></p>
+                          </div>
+                        </div>
+          </div>
+            <%})%>
+        </div>
     <%})%>
-</div>
 <%- include("partials/footer"); -%>

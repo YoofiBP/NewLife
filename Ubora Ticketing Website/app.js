@@ -110,7 +110,12 @@ app.post('/add_cat', function(req,res){
 });
 
 app.get('/add_nominee', function(req,res){
-  let firebaseCategories = [];
+  Category.find(function(err, Nomineecategories){
+    if(err){
+      console.log(err);
+    }else{
+      res.render('add_nominee', {categories:Nomineecategories});
+  }});/*
   let registeredRef = db.collection('categories');
   registeredRef.get().then(snapshot => {
     snapshot.forEach(doc => {
@@ -119,7 +124,7 @@ app.get('/add_nominee', function(req,res){
     res.render('add_nominee', {categories:firebaseCategories});
   }).catch(err => {
     console.log('Error getting documents', err);
-  });
+  });*/
 });
 
 app.post('/add_nominee', function(req,res){
@@ -181,6 +186,13 @@ app.get('/view_categories', function(req,res){
 
 app.get('/view_nominees', function(req,res){
   let nominees = [];
+  Category.find(function(err, categories){
+    if(err){
+      console.log(err);
+    }else{
+      res.render('view_nominees', {nomineesRegistered:categories});
+  }});
+  /*
   let nomineesRef = db.collection('nominees');
   nomineesRef.get().then(snapshot => {
     snapshot.forEach(doc => {
@@ -191,7 +203,7 @@ app.get('/view_nominees', function(req,res){
     res.render('view_nominees', {nomineesRegistered:nominees});
   }).catch(err => {
     console.log('Error getting documents', err);
-  });
+  });*/
 });
 
 app.listen(3000, function(){
