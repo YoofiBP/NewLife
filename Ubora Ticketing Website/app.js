@@ -123,7 +123,6 @@ app.get('/add_nominee', function(req,res){
 });
 
 app.post('/add_nominee', function(req,res){
-  console.log(req.body);
   let nom_name = req.body.nom_name;
   let nom_major = req.body.nom_major;
   let nom_yg = req.body.nom_yg;
@@ -143,15 +142,21 @@ app.post('/add_nominee', function(req,res){
     'category': nom_cat,
     'nom_year': thisYear
   }).then(res.redirect('/view_nominees'));*/
-
-  firebase.database().ref('categories/'+nom_cat+'/nominees').set({
-    'name' : nom_name,
-    'major' : nom_major,
-    'year_group' : nom_yg,
-    'image_source': "",
-    'description' : nom_descr,
-    'nom_year': thisYear
-  }).then(res.redirect('/view_nominees'));
+  let nominee = {
+    name: nom_name,
+    year_group: nom_yg,
+    major : nom_major,
+    image_source: "",
+    description : nom_descr
+  };
+  Category.updateOne({name: nom_cat}, {$push: {nominees: nominee}},function(err){
+    if(err){
+      console.log(err);
+    }else{
+      console.log("Success");
+      res.redirect('/view_nominees');
+    }
+  });
 });
 
 app.get('/view_categories', function(req,res){
