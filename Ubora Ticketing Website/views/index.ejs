@@ -14,5 +14,15 @@
     <button type="button" name="button">Award Information</button>
     <button type="button" name="button">Ticketing</button>
   </div>
+  <div class="">
+    <% if(eventInfo[0].show_location==true){%>
+      <p><%=eventInfo[0].location%></p>
+    <%}%>
+
+    <%let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };%>
+    <% let date = new Date(eventInfo[0].date)%>
+    <p><%=date.toLocaleDateString("en-US", options)%></p>
+    <p><%=eventInfo[0].time%></p>
+  </div>
 </div>
 <%- include("partials/footer"); -%>

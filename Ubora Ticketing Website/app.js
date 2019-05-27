@@ -36,7 +36,16 @@ const CategorySchema = new mongoose.Schema({
   }]
 });
 
+const EventSchema = new mongoose.Schema({
+  location: String,
+  date: String,
+  time: String,
+  show_location: Boolean,
+  header_image_src: String
+});
+
 const Category = new mongoose.model('Category', CategorySchema);
+const Event = new mongoose.model('Event', EventSchema);
 
 let db = firebase.firestore();
 
@@ -46,7 +55,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 
 app.get('/', function(req,res){
-  res.render('index');
+  Event.find(function(err, eventInfoFromDB){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(eventInfoFromDB);
+      res.render('index', {eventInfo:eventInfoFromDB});  
+    }
+  });
 });
 
 app.get('/get_ticket', function(req,res){
@@ -185,7 +201,6 @@ app.get('/view_categories', function(req,res){
 });
 
 app.get('/view_nominees', function(req,res){
-  let nominees = [];
   Category.find(function(err, categories){
     if(err){
       console.log(err);
@@ -207,8 +222,37 @@ app.get('/view_nominees', function(req,res){
 });
 
 app.get('/edit_info', function(req,res){
-  res.render('edit_info');
-})
+  Event.find(function(err, eventInfoFromDB){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(eventInfoFromDB);
+      res.render('edit_info', {eventInfo:eventInfoFromDB});  
+    }
+  });
+});
+
+app.post('/edit_info', function(req, res){
+  let event_date = req.body.ev_date;
+  let event_time = req.body.ev_time;
+  let event_location = req.body.ev_location;
+  let showLocation;
+  if(req.body.showLocation == "on"){
+    show_location = true;
+  }else{
+    show_location = false;
+  }
+  let header_img = req.body.headerImg;
+
+  Event.updateOne({}, {location:event_location, date:event_date, time:event_time, show_location:show_location, header_image_src:header_img},function(err){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(event_date, event_location, event_time, show_location, header_img);
+      res.redirect('/');
+    }
+  });
+});
 
 app.listen(3000, function(){
   console.log("Server up and running on port 3000");
