@@ -1,5 +1,30 @@
 //jshint esversion:6
 require('dotenv').config();
+const fs =  require('fs');
+const GoogleCloudStorage = require('@google-cloud/storage');
+const GOOGLE_CLOUD_PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT_ID;
+const GOOGLE_CLOUD_KEYFILE = 'UboraAwards-918af3abb9f5.json';
+
+const storage = GoogleCloudStorage({
+  projectId: GOOGLE_CLOUD_PROJECT_ID,
+  keyFilename: GOOGLE_CLOUD_KEYFILE
+});
+
+exports.getPublicUrl = (bucketName, fileName) => `https://storage.googleapis.com/${bucketName}/${fileName}`;
+
+	
+exports.copyFileToGCS = (localFilePath, bucketName, options) => {
+  options = options || {};
+
+  const bucket = storage.bucket(bucketName);
+  const fileName = path.basename(localFilePath);
+  const file = bucket.file(fileName);
+
+  return bucket.upload(localFilePath, options)
+    .then(() => file.makePublic())
+    .then(() => exports.getPublicUrl(bucketName, gcsName));
+};
+
 const express = require('express');
 const ejs = require('ejs');
 const jquery = require('jquery');
@@ -252,6 +277,15 @@ app.post('/edit_info', function(req, res){
       res.redirect('/');
     }
   });
+});
+
+app.get('/upload', function(req,res){
+  res.render('upload');
+});
+
+
+app.post('/upload', function(req,res){
+  
 });
 
 app.listen(3000, function(){

@@ -22,7 +22,7 @@
     <%let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };%>
     <% let date = new Date(eventInfo[0].date)%>
     <p><%=date.toLocaleDateString("en-US", options)%></p>
-    <p><%=eventInfo[0].time%></p>
+    <p><%=eventInfo[0].time%> GMT</p>
   </div>
 </div>
 <%- include("partials/footer"); -%>
