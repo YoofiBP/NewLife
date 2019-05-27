@@ -1,31 +1,23 @@
 //jshint esversion:6
 require('dotenv').config();
 const fs =  require('fs');
-const GoogleCloudStorage = require('@google-cloud/storage');
+const restify = require("restify");
+const uuidv4 = require("uuid/v4");
+const {Storage} = require('@google-cloud/storage');
+const CLOUD_BUCKET = process.env.CLOUD_BUCKET;
 const GOOGLE_CLOUD_PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT_ID;
 const GOOGLE_CLOUD_KEYFILE = 'UboraAwards-918af3abb9f5.json';
 
-const storage = GoogleCloudStorage({
+const storage = new Storage({
   projectId: GOOGLE_CLOUD_PROJECT_ID,
   keyFilename: GOOGLE_CLOUD_KEYFILE
 });
 
-exports.getPublicUrl = (bucketName, fileName) => `https://storage.googleapis.com/${bucketName}/${fileName}`;
-
-	
-exports.copyFileToGCS = (localFilePath, bucketName, options) => {
-  options = options || {};
-
-  const bucket = storage.bucket(bucketName);
-  const fileName = path.basename(localFilePath);
-  const file = bucket.file(fileName);
-
-  return bucket.upload(localFilePath, options)
-    .then(() => file.makePublic())
-    .then(() => exports.getPublicUrl(bucketName, gcsName));
-};
+const bucket = storage.bucket(CLOUD_BUCKET);
 
 const express = require('express');
+const multer = require('multer');
+let upload = multer({dest: 'uploads/'});
 const ejs = require('ejs');
 const jquery = require('jquery');
 const bodyParser = require('body-parser');
@@ -284,8 +276,29 @@ app.get('/upload', function(req,res){
 });
 
 
-app.post('/upload', function(req,res){
+app.post('/upload', upload.single('nom_image'), function(req,res){
   
+const file = req.file;
+const gcsname = uuidv4() + file.originalname;
+
+const files = bucket.file(gcsname);
+
+fs.createReadStream(file.path)
+  .pipe( files.createWriteStream({
+      metadata: {
+        contentType: file.type
+      }
+    }))
+    .on("error", (err) => {
+      restify.InternalServerError(err);
+    })
+    .on('finish', () => {
+      res.json({
+        success: true,
+        fileUrl: `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname}`
+      });
+    });
+   console.log(gcsname);
 });
 
 app.listen(3000, function(){
