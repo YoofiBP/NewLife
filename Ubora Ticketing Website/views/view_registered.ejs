@@ -1,4 +1,8 @@
 <%- include("partials/header"); -%>
+<form action="/logout" method="POST">
+<button type="submit" class="btn btn-primary">Logout</button>
+</form>
+
 <div class="col-lg-8">
   <table class="table">
     <thead>
@@ -16,8 +20,8 @@
   <td><%=user.lname%></td>
   <td><%=user.email%></td>
   <td><%=user.yearGroup%></td>
-  <td><button type="button" name="button" class="btn">Delete</button></td>
-  <td><button type="button" name="button" class="btn">Send to Eventbrite</button></td>
+  <td><button type="button" name="button" class="btn btn-primary">Delete</button></td>
+  <td><button type="button" name="button" class="btn btn-primary">Send to Eventbrite</button></td>
   </tr>
   <%})%>
   </tbody>

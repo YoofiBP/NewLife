@@ -39,6 +39,7 @@ messagingSenderId: process.env.MESSAGING_SENDER_ID,
 appId: process.env.APP_ID
 });
 
+
 mongoose.connect("mongodb://localhost:27017/uboraDB", { useNewUrlParser: true });
 
 const CategorySchema = new mongoose.Schema({
@@ -71,6 +72,28 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 
+function stateObserver(){
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+    } else {
+      res.redirect('/login');
+    }
+  });
+}
+
+function isUserSignedIn() {
+  // TODO 6: Return true if a user is signed-in.
+  return !!firebase.auth().currentUser;
+}
+
+function protect(res){
+  if(!isUserSignedIn()){
+    res.redirect('/login');
+  }
+}
+
+
 app.get('/', function(req,res){
   Event.find(function(err, eventInfoFromDB){
     if(err){
@@ -102,6 +125,7 @@ app.post('/get_ticket', function(req,res){
 });
 
 app.get('/view_registered', function(req,res){
+  protect(res);
   let users = [];
   let registeredRef = db.collection('registered');
   registeredRef.get().then(snapshot => {
@@ -116,6 +140,7 @@ app.get('/view_registered', function(req,res){
 });
 
 app.get('/add_cat', function(req,res){
+  protect(res);
   res.render('add_category');
 });
 
@@ -138,6 +163,7 @@ app.post('/add_cat', function(req,res){
 });
 
 app.get('/add_nominee', function(req,res){
+  protect(res);
   Category.find(function(err, Nomineecategories){
     if(err){
       console.log(err);
@@ -186,6 +212,7 @@ fs.createReadStream(file.path)
 });
 
 app.get('/view_categories', function(req,res){
+  protect(res);
   let categories = [];
   Category.find(function(err, categories){
     if(err){
@@ -196,6 +223,7 @@ app.get('/view_categories', function(req,res){
 });
 
 app.get('/view_nominees', function(req,res){
+  protect(res);
   Category.find(function(err, categories){
     if(err){
       console.log(err);
@@ -205,6 +233,7 @@ app.get('/view_nominees', function(req,res){
 });
 
 app.get('/edit_info', function(req,res){
+  protect(res);
   Event.find(function(err, eventInfoFromDB){
     if(err){
       console.log(err);
@@ -274,14 +303,25 @@ app.get('/login', function(req,res){
 app.post('/login', function(req,res){
   let email = req.body.admin_email;
   let password = req.body.admin_password;
-  firebase.auth().signInWithEmailAndPassword(email, password).then(function(){res.redirect('/view_registered');}).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    console.log('errorCode: ', errorCode);
-    var errorMessage = error.message;
-    console.log('errorMessage: ', errorMessage);
-    // ...
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+  .then(function(){
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+      res.redirect('/view_registered');
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      console.log('errorCode: ', errorCode);
+      var errorMessage = error.message;
+      console.log('errorMessage: ', errorMessage);
+      res.render('admin_login', {errors:errorMessage});
+      // ...
+    });
   });
+});
+
+app.post('/logout', function(req,res){
+  firebase.auth().signOut();
+  res.redirect('/login');
 })
 
 app.listen(3000, function(){
