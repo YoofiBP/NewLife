@@ -330,14 +330,22 @@ app.post('/login', function(req,res){
   });
 });
 
-app.post('/logout', function(req,res){
+app.get('/logout', function(req,res){
   firebase.auth().signOut();
   res.redirect('/login');
 });
 
-app.get('/logout/:id', function(req,res){
-  
-})
+app.get('/delete/:id', function(req,res){
+  let id = req.params.id;
+
+  Attendee.findByIdAndRemove(id, function(err){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/view_registered');
+    }
+  })
+});
 
 app.listen(3000, function(){
   console.log("Server up and running on port 3000");
