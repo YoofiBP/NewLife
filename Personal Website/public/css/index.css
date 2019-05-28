@@ -1,16 +1,15 @@
-/* #skills img {
+ #skills img {
   height: 100px;
   width: 250px;
-} */
+} 
+
+html {
+  scroll-behavior: smooth;
+}
 
 .brand-logo {
   width: 100px;
   padding: 0px;
-}
-
-#skills img {
-  height: 100px;
-  width: 100px;
 }
 
 nav {
@@ -44,3 +43,4 @@ nav {
   color: white;
   text-shadow: 1px 1px 1px #000;
 }
+
