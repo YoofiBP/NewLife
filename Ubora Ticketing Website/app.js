@@ -241,6 +241,18 @@ app.get('/login', function(req,res){
   res.render('admin_login');
 });
 
+app.post('/login', function(req,res){
+  let email = req.body.admin_email;
+  let password = req.body.admin_password;
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function(){res.redirect('/view_registered');}).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode,errorMessage);
+    // ...
+  });
+})
+
 app.listen(3000, function(){
   console.log("Server up and running on port 3000");
 });
