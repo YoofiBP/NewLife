@@ -1,6 +1,7 @@
 //jshint esversion:6
 require('dotenv').config();
 const fs =  require('fs');
+const _ = require('lodash');
 const restify = require("restify");
 const uuidv4 = require("uuid/v4");
 const {Storage} = require('@google-cloud/storage');
@@ -42,6 +43,8 @@ appId: process.env.APP_ID
 
 mongoose.connect("mongodb://localhost:27017/uboraDB", { useNewUrlParser: true });
 
+let models = [];
+
 const CategorySchema = new mongoose.Schema({
   name: String,
   description: String,
@@ -70,8 +73,12 @@ const AttendeeSchema = new mongoose.Schema({
 });
 
 const Category = new mongoose.model('Category', CategorySchema);
+models['Category'] = Category;
 const Event = new mongoose.model('Event', EventSchema);
+models['Event'] = Event;
 const Attendee = new mongoose.model('Attendee', AttendeeSchema);
+models['Attendee'] = Attendee;
+
 
 let db = firebase.firestore();
 
@@ -335,14 +342,15 @@ app.get('/logout', function(req,res){
   res.redirect('/login');
 });
 
-app.get('/delete/:id', function(req,res){
+app.get('/delete/:model/:id', function(req,res){
   let id = req.params.id;
+  let model = _.startCase(req.params.model);
 
-  Attendee.findByIdAndRemove(id, function(err){
+  models[model].findByIdAndRemove(id, function(err){
     if(err){
       console.log(err);
     }else{
-      res.redirect('/view_registered');
+      res.redirect('back');
     }
   })
 });
