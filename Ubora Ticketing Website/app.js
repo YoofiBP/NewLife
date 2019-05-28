@@ -176,6 +176,7 @@ app.get('/add_cat/:id', function(req,res){
 });
 
 app.post('/add_cat', function(req,res){
+  /* FIND ITEM, IF YOU CANT, CREATE A NEW ONE */
   let cat_name = req.body.cat_name;
   let cat_descr = req.body.cat_descr;
 
