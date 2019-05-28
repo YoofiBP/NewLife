@@ -2,3 +2,45 @@
   height: 100px;
   width: 250px;
 } */
+
+.brand-logo {
+  width: 100px;
+  padding: 0px;
+}
+
+#skills img {
+  height: 100px;
+  width: 100px;
+}
+
+nav {
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  text-shadow: 1px 1px 1px #000;
+}
+
+@media (min-width: 768px) {
+  .navbar-brand.abs
+      {
+          position: absolute;
+          width: 100%;
+          left: 0;
+          text-align: center;
+      }
+  }
+
+.p1{
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.623)
+  ),url('/img/West_Ridge_Accra_Street.jpg');
+  background-size: cover;
+  height: 700px;
+}
+
+.intro {
+  padding-top: 150px;
+  font-family: 'News Cycle', sans-serif;
+  color: white;
+  text-shadow: 1px 1px 1px #000;
+}
