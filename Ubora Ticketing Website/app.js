@@ -237,8 +237,8 @@ app.post('/edit_info', function(req, res){
   });
 });
 
-app.get('/upload', function(req,res){
-  res.render('upload');
+app.get('/login', function(req,res){
+  res.render('admin_login');
 });
 
 app.listen(3000, function(){
