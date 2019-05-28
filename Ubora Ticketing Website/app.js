@@ -123,11 +123,6 @@ app.post('/add_cat', function(req,res){
   let cat_name = req.body.cat_name;
   let cat_descr = req.body.cat_descr;
 
-  /*let newCat = db.collection('categories').doc(cat_name);
-  newCat.set({
-    'name' : cat_name,
-    'description' : cat_descr
-  }).then(res.redirect('/view_categories'));*/
   const category = new Category({
     name: cat_name,
     description: cat_descr
@@ -148,53 +143,46 @@ app.get('/add_nominee', function(req,res){
       console.log(err);
     }else{
       res.render('add_nominee', {categories:Nomineecategories});
-  }});/*
-  let registeredRef = db.collection('categories');
-  registeredRef.get().then(snapshot => {
-    snapshot.forEach(doc => {
-      firebaseCategories.push(doc.data());
-    });
-    res.render('add_nominee', {categories:firebaseCategories});
-  }).catch(err => {
-    console.log('Error getting documents', err);
-  });*/
+  }});
 });
 
-app.post('/add_nominee', function(req,res){
-  let nom_name = req.body.nom_name;
-  let nom_major = req.body.nom_major;
-  let nom_yg = req.body.nom_yg;
-  let nom_image = req.body.nom_image;
-  let nom_descr = req.body.nom_descr;
-  let nom_cat = req.body.nom_cat;
-  let today = new Date();
-  let thisYear = today.getFullYear();
-  /*
-  let newNom = db.collection('nominees').doc(nom_name);
-  newNom.set({
-    'name' : nom_name,
-    'major' : nom_major,
-    'year_group' : nom_yg,
-    'image_source': "",
-    'description' : nom_descr,
-    'category': nom_cat,
-    'nom_year': thisYear
-  }).then(res.redirect('/view_nominees'));*/
+app.post('/add_nominee', upload.single('nom_image'), function(req,res){
+  const file = req.file;
+  const gcsname = uuidv4() + file.originalname;
+
+  const files = bucket.file(gcsname);
+  
   let nominee = {
-    name: nom_name,
-    year_group: nom_yg,
-    major : nom_major,
-    image_source: "",
-    description : nom_descr
+    name: req.body.nom_name,
+    year_group: req.body.nom_yg,
+    major : req.body.nom_major,
+    image_source: `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname}`,
+    description : req.body.nom_descr
   };
-  Category.updateOne({name: nom_cat}, {$push: {nominees: nominee}},function(err){
+
+  Category.updateOne({name: req.body.nom_cat}, {$push: {nominees: nominee}},function(err){
     if(err){
       console.log(err);
     }else{
       console.log("Success");
-      res.redirect('/view_nominees');
     }
   });
+
+fs.createReadStream(file.path)
+  .pipe( files.createWriteStream({
+      metadata: {
+        contentType: file.type
+      }
+    }))
+    .on("error", (err) => {
+      restify.InternalServerError(err);
+      console.log(err);
+    })
+    .on('finish', () => {
+      res.redirect('/view_nominees');
+    });
+   console.log(gcsname);
+
 });
 
 app.get('/view_categories', function(req,res){
@@ -205,16 +193,6 @@ app.get('/view_categories', function(req,res){
     }else{
       res.render('view_categories', {categoriesRegistered:categories});
   }});
-  /*let categoriesRef = db.collection('categories');
-  categoriesRef.get().then(snapshot => {
-    snapshot.forEach(doc => {
-      categories.push(doc.data());
-    });
-    console.log(categories);
-    res.render('view_categories', {categoriesRegistered:categories});
-  }).catch(err => {
-    console.log('Error getting documents', err);
-  });*/
 });
 
 app.get('/view_nominees', function(req,res){
@@ -224,18 +202,6 @@ app.get('/view_nominees', function(req,res){
     }else{
       res.render('view_nominees', {nomineesRegistered:categories});
   }});
-  /*
-  let nomineesRef = db.collection('nominees');
-  nomineesRef.get().then(snapshot => {
-    snapshot.forEach(doc => {
-      nominees.push(doc.data());
-    });
-    nominees.sort((a,b)=>(a.category > b.category) ? 1:-1);
-    console.log(nominees);
-    res.render('view_nominees', {nomineesRegistered:nominees});
-  }).catch(err => {
-    console.log('Error getting documents', err);
-  });*/
 });
 
 app.get('/edit_info', function(req,res){
@@ -273,32 +239,6 @@ app.post('/edit_info', function(req, res){
 
 app.get('/upload', function(req,res){
   res.render('upload');
-});
-
-
-app.post('/upload', upload.single('nom_image'), function(req,res){
-  
-const file = req.file;
-const gcsname = uuidv4() + file.originalname;
-
-const files = bucket.file(gcsname);
-
-fs.createReadStream(file.path)
-  .pipe( files.createWriteStream({
-      metadata: {
-        contentType: file.type
-      }
-    }))
-    .on("error", (err) => {
-      restify.InternalServerError(err);
-    })
-    .on('finish', () => {
-      res.json({
-        success: true,
-        fileUrl: `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname}`
-      });
-    });
-   console.log(gcsname);
 });
 
 app.listen(3000, function(){

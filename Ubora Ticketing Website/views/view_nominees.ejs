@@ -9,7 +9,7 @@
             <%category.nominees.forEach(function(nominee){%>
               <div class="col-lg-3">
                   <div class="card nom_card">
-                          <img class="card-img-top nominee-image" src="/img/Profile-512.png" alt="Card image cap">
+                          <img class="card-img-top nominee-image" src="<%=nominee.image_source%>" alt="Card image cap">
                           <div class="card-body">
                             <h5 class="card-title"><%=nominee.name%></h5>
                             <p>Major: <%=nominee.major%></p>
