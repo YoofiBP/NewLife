@@ -1,5 +1,5 @@
 <%- include("partials/header"); -%>
-<form action="/edit_info" method="POST">
+<form action="/edit_info" method="POST" enctype="multipart/form-data">
    <div class="form-group">
     <label for="ev_date">Event Date</label>
     <input type="date" class="form-control" name="ev_date" id="ev_date" value="<%=eventInfo[0].date%>">

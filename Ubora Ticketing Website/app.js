@@ -215,7 +215,8 @@ app.get('/edit_info', function(req,res){
   });
 });
 
-app.post('/edit_info', function(req, res){
+app.post('/edit_info', upload.single('headerImg'), function(req, res){
+
   let event_date = req.body.ev_date;
   let event_time = req.body.ev_time;
   let event_location = req.body.ev_location;
@@ -225,16 +226,45 @@ app.post('/edit_info', function(req, res){
   }else{
     show_location = false;
   }
-  let header_img = req.body.headerImg;
+  if(req.file!=undefined){
+  const file2 = req.file;
+  const gcsname2 = uuidv4() + file2.originalname;
+
+  const files = bucket.file(gcsname2);
+  let header_img = `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname2}`;
 
   Event.updateOne({}, {location:event_location, date:event_date, time:event_time, show_location:show_location, header_image_src:header_img},function(err){
     if(err){
       console.log(err);
     }else{
       console.log(event_date, event_location, event_time, show_location, header_img);
-      res.redirect('/');
     }
   });
+
+  fs.createReadStream(file2.path)
+  .pipe( files.createWriteStream({
+      metadata: {
+        contentType: file2.type
+      }
+    }))
+    .on("error", (err) => {
+      restify.InternalServerError(err);
+      console.log(err);
+    })
+    .on('finish', () => {
+      res.redirect('/');
+    });
+   console.log(gcsname2);
+  }else{
+    Event.updateOne({}, {location:event_location, date:event_date, time:event_time, show_location:show_location},function(err){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(event_date, event_location, event_time, show_location);
+        res.redirect('/');
+      }
+    });
+  }
 });
 
 app.get('/login', function(req,res){
@@ -247,8 +277,9 @@ app.post('/login', function(req,res){
   firebase.auth().signInWithEmailAndPassword(email, password).then(function(){res.redirect('/view_registered');}).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
+    console.log('errorCode: ', errorCode);
     var errorMessage = error.message;
-    console.log(errorCode,errorMessage);
+    console.log('errorMessage: ', errorMessage);
     // ...
   });
 })
