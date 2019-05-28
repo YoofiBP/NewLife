@@ -162,6 +162,19 @@ app.get('/add_cat', function(req,res){
   res.render('add_category');
 });
 
+app.get('/add_cat/:id', function(req,res){
+  protect(res);
+  let id = req.params.id;
+
+  Category.findById(id, function(err, categoryInfo){
+    if(err){
+      console.log('err: ', err);
+    }else{
+      res.render('add_category', {catinfo:categoryInfo});
+    }
+  });
+});
+
 app.post('/add_cat', function(req,res){
   let cat_name = req.body.cat_name;
   let cat_descr = req.body.cat_descr;
