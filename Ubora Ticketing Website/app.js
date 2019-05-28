@@ -62,8 +62,16 @@ const EventSchema = new mongoose.Schema({
   header_image_src: String
 });
 
+const AttendeeSchema = new mongoose.Schema({
+  email: String,
+  fname: String,
+  lname: String,
+  yearGroup: Number
+});
+
 const Category = new mongoose.model('Category', CategorySchema);
 const Event = new mongoose.model('Event', EventSchema);
+const Attendee = new mongoose.model('Attendee', AttendeeSchema);
 
 let db = firebase.firestore();
 
@@ -115,27 +123,30 @@ app.post('/get_ticket', function(req,res){
   let email = req.body.email;
   let yearGroup = req.body.yearGroup;
 
-  let newUser = db.collection('registered').doc(fname+'_'+lname);
-  newUser.set({
-    'fname': fname,
-    'lname': lname,
-    'email': email,
-    'yearGroup': yearGroup
-  }).then(res.redirect('/'));
+  const attendee = new Attendee({
+    fname: fname,
+    lname: lname,
+    email: email,
+    yearGroup: yearGroup
+  });
+
+  attendee.save(function(err,product){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/view_registered');
+    }
+  });
 });
 
 app.get('/view_registered', function(req,res){
   protect(res);
-  let users = [];
-  let registeredRef = db.collection('registered');
-  registeredRef.get().then(snapshot => {
-    snapshot.forEach(doc => {
-      users.push(doc.data());
-    });
-    console.log(users[1]);
-    res.render('view_registered', {usersRegistered:users});
-  }).catch(err => {
-    console.log('Error getting documents', err);
+  Attendee.find(function(err, users){
+    if(err){
+      console.log(err);
+    }else{
+      res.render('view_registered', {usersRegistered:users});
+    }
   });
 });
 
@@ -322,6 +333,10 @@ app.post('/login', function(req,res){
 app.post('/logout', function(req,res){
   firebase.auth().signOut();
   res.redirect('/login');
+});
+
+app.get('/logout/:id', function(req,res){
+  
 })
 
 app.listen(3000, function(){
