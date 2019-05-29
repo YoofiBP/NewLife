@@ -50,6 +50,11 @@ nav {
 
 .card p {
   font-size: 13px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.card h5 {
+  font-family: 'Roboto', sans-serif;
 }
 
 .card {
@@ -66,4 +71,8 @@ nav {
     max-height:95px;
     width: auto;
     height: auto;
+}
+
+.jumbotron h1 {
+  font-family: 'Oswald', sans-serif;
 }
