@@ -34,7 +34,6 @@ nav {
     rgba(0, 0, 0, 0.623)
   ),url('/img/West_Ridge_Accra_Street.jpg');
   background-size: cover;
-  height: 700px;
 }
 
 .intro {
@@ -44,3 +43,27 @@ nav {
   text-shadow: 1px 1px 1px #000;
 }
 
+.section {
+  height: 700px;
+  background-color: white;
+}
+
+.card p {
+  font-size: 13px;
+}
+
+.card {
+  border: none;
+}
+
+.card a:hover {
+  text-decoration: none;
+}
+
+.skills img {
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+}
