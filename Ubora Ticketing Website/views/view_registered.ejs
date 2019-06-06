@@ -1,8 +1,11 @@
 <%- include("partials/header"); -%>
-<a href="/logout" role="button" class="btn btn-primary">Logout</a>
-<a href="/get_ticket" role="button" class="btn btn-primary">Add Attendee</a>
+<a href="/logout" role="button" class="btn btn-outline-light">Logout</a>
+<a href="/get_ticket" role="button" class="btn btn-outline-light">Add Attendee</a>  
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+   
+  <div class="row justify-content-center">
 <div class="col-lg-8">
-  <table class="table">
+  <table class="table table-borderless">
     <thead>
       <tr>
         <th>First Name</th>
@@ -18,12 +21,14 @@
   <td><%=user.lname%></td>
   <td><%=user.email%></td>
   <td><%=user.yearGroup%></td>
-  <td><a href="/delete/attendee/<%=user._id%>" role="button" name="button" class="btn btn-primary">Delete</a></td>
-  <td><a href="" role="button" name="button" class="btn btn-primary">Send to Eventbrite</a></td>
+  <td><a href="/delete/attendee/<%=user._id%>" role="button" name="button" class="btn btn-outline-light">Delete</a></td>
+  <td><a href="" role="button" name="button" class="btn btn-outline-light">Send to Eventbrite</a></td>
   </tr>
   <%})%>
   </tbody>
   </table>
+</div>
+</div>
 </div>
 
 <%- include("partials/footer"); -%>

@@ -1,5 +1,7 @@
 <%- include("partials/header"); -%>
-
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
 <form action="/add_cat" method="post">
   <div class="form-group">
     <label for="cat_name">Category Name</label>
@@ -17,6 +19,9 @@
       <input type="text" class="form-control" id="cat_descr" name="cat_descr" aria-describedby="fnameField" placeholder="Enter Category Description">
     <%}%>
   </div>
-  <button type="submit" class="btn btn-primary">Confirm Changes</button>
+  <button type="submit" class="btn btn-outline-light">Confirm Changes</button>
 </form>
+</div>
+</div>
+</div>
 <%- include("partials/footer"); -%>

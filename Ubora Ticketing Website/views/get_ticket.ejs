@@ -1,5 +1,12 @@
 <%- include("partials/header"); -%>
-<form action="/get_ticket" method="post">
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class="row justify-content-center">
+  <a href="#">Home</a>
+  &nbsp
+  <a href="#">Awards</a>
+</div>  
+  <div class="row justify-content-center">
+<form action="/get_ticket" method="post" class="col-lg-8">
   <div class="form-group">
     <label for="fname">First Name</label>
     <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameField" placeholder="Enter First Name">
@@ -17,6 +24,8 @@
     <label for="yearGroup">Year Group</label>
     <input type="text" class="form-control" id="yearGroup" name="yearGroup" aria-describedby="ygField" placeholder="Enter Year Group">
   </div>
-  <button type="submit" class="btn btn-primary">Register</button>
+  <button type="submit" class="btn btn-outline-light">Register</button>
 </form>
+</div>
+</div>
 <%- include("partials/footer"); -%>
