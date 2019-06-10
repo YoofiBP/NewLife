@@ -38,3 +38,18 @@ Learning libraries to demonstrate a firm understanding of Natural Language Proce
       <p>Drum Kit sound webpage to demonstrate Document Object Model Manipulation<p>
         <p>To Do List with ExpressJS<p>
   </div>
+
+##Add to CV
+5477 students to upload
+5 seconds per upload
+
+Should have taken 
+27 385 seconds
+456 minutes
+7.6 hours if done continuously
+
+Was completed in 5 minutes
+
+1.09649123
+98.9035088% reduction in time
+Reduced 

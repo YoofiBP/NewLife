@@ -1,9 +1,8 @@
 <%- include("partials/header"); -%>
-<a href="/logout" role="button" class="btn btn-outline-light">Logout</a>
-<a href="/get_ticket" role="button" class="btn btn-outline-light">Add Attendee</a>  
 <div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
    
-  <div class="row justify-content-center">
+  <div class="row">
+    <%- include("partials/admin_sidebar"); -%>
 <div class="col-lg-8">
   <table class="table table-borderless">
     <thead>

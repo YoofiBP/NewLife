@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="css/homepage.css">
 <%- include("partials/header"); -%>
 <div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
-     <video autoplay muted loop id="myVideo">
+     <!-- <video autoplay muted loop id="myVideo">
       <source src="https://www.youtube.com/embed/8SgmWihcCYM" type="video/mp4"/>
-     </video>
+     </video> -->
   <div class="row justify-content-center align-items-center">
       <img class="header-image" src="<%=eventInfo[0].header_image_src%>"/>
   </div>
@@ -24,7 +24,7 @@
       </div>
       <div class="row justify-content-center align-items-center">
     
-    <a role="button" name="button" class="btn btn-outline-light" href="#">Awards</a>
+    <a role="button" name="button" class="btn btn-outline-light" href="/view_nominees">Awards</a>
     <a role="button" name="button" class="btn btn-outline-light" href="/get_ticket">Ticketing</a>
   
 </div>

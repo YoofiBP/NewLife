@@ -1,15 +1,24 @@
 <%- include("partials/header"); -%>
+<div class="row justify-content-center">
+  <a id="top"></a>
+  <a href="/">Home</a>
+  &nbsp
+  &nbsp
+  &nbsp
+
+  <a href="/get_ticket">Get Tickets</a>
+</div> 
         <% nomineesRegistered.forEach(function(category){%>
-          <div class="row">
+          <div class="row align-items-center">
             <div class="col-lg-12 text-center">
-                <h1 class="display-3"><%=category.name%></h1>
+                <h1 class="display-4 lead"><%=category.name%></h1>
             </div>
           </div>
-          <div class="row no-gutters">
+          <div class="row no-gutters w-100">
             <%category.nominees.forEach(function(nominee){%>
-              <div class="col-lg-3">
-                  <div class="card nom_card">
-                          <img class="card-img-top nominee-image" src="<%=nominee.image_source%>" alt="Card image cap">
+              
+                  <div class="card nom_card hvr-bob col-lg-3 text-center">
+                          <img class="card-img-top nominee-image align-self-center" src="<%=nominee.image_source%>" alt="Card image cap">
                           <div class="card-body">
                             <h5 class="card-title"><%=nominee.name%></h5>
                             <p>Major: <%=nominee.major%></p>
@@ -17,8 +26,11 @@
                             <p class="card-text"><%=nominee.description%></p>
                           </div>
                         </div>
-          </div>
             <%})%>
         </div>
     <%})%>
+    <a href="#top" class="hvr-icon-wobble-vertical stickyButton fixed-bottom">
+      To Top
+<i class="fa fa-arrow-up hvr-icon"></i>
+    </a>
 <%- include("partials/footer"); -%>

@@ -1,7 +1,9 @@
 //jshint esversion:6
 // $('.header-image').hide();
 let imageSrc = $('.header-image').attr('src');
+$('.display-4').css('color','white');
 $('.random').css('background-image', 'url("'+imageSrc+'")');
+$('.card h5, p').addClass('text-left');
 console.log(imageSrc);
 // Set the date we're counting down to
 let date = $('body > div > div > div:nth-child(3) > ul > li:nth-child(2)').attr('name');

@@ -1,6 +1,12 @@
+html {
+    scroll-behavior: smooth;
+  }
+
 .nominee-image {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+    text-align: center;
 }
 
 .nom_card {
@@ -11,14 +17,24 @@ html {
     background-color: black;
 }
 
-.container-fluid {
+.container-fluid, .card {
     background-color: black;
 }
 
-label {
+label, th, td, .card h5, .card p{
     color: white;
 }
 
-th, td {
-    color: white;
+.display-4 {
+    color: gold;
+}
+
+.stickyButton{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar a {
+    margin-bottom: 20px;
 }

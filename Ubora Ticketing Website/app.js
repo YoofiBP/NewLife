@@ -255,7 +255,6 @@ app.get('/view_categories', function(req,res){
 });
 
 app.get('/view_nominees', function(req,res){
-  protect(res);
   Category.find(function(err, categories){
     if(err){
       console.log(err);
