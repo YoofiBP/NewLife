@@ -38,3 +38,7 @@ label, th, td, .card h5, .card p{
 .sidebar a {
     margin-bottom: 20px;
 }
+
+.sidebar i {
+    padding-right: 8px;
+}
