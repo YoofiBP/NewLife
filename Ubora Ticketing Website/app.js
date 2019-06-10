@@ -230,7 +230,33 @@ app.get('/add_nominee', function(req,res){
   }});
 });
 
+app.get('/add_nominee/:categoryId/:id', function(req,res){
+  let catId = req.params.categoryId;
+  let nomId = req.params.id;
+
+  protect(res);
+  Category.find(function(err, Nomineecategories){
+    if(err){
+      console.log(err);
+    }else{
+      Category.findById(catId, function(err, nomineeInfo){
+        if(err){
+          console.log('err: ', err);
+        }else{
+          nomineeInfo.nominees.forEach(function(nominee){
+            if(nominee.id === nomId){
+              res.render('add_nominee', {nomineeInfo:nominee, categories:Nomineecategories});
+            }else{
+              console.log("Id does not exist");
+            }
+          });
+        }
+      });
+  }});
+});
+
 app.post('/add_nominee', upload.single('nom_image'), function(req,res){
+  let nomId = req.body
   const file = req.file;
   const gcsname = uuidv4() + file.originalname;
 
@@ -263,7 +289,7 @@ fs.createReadStream(file.path)
       console.log(err);
     })
     .on('finish', () => {
-      res.redirect('/view_nominees');
+      res.redirect('/admin_view_nominees');
     });
    console.log(gcsname);
 
