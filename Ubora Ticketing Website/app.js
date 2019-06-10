@@ -177,9 +177,23 @@ app.get('/add_cat/:id', function(req,res){
 
 app.post('/add_cat', function(req,res){
   /* FIND ITEM, IF YOU CANT, CREATE A NEW ONE */
+  let id = req.body.categoryId;
   let cat_name = req.body.cat_name;
   let cat_descr = req.body.cat_descr;
-
+  
+  console.log('id: ', id);
+  console.log('cat_name: ', cat_name);
+  console.log('cat_descr: ', cat_descr);
+  if(id!=undefined){
+    Category.findByIdAndUpdate(id, {$set: {name: cat_name, description:cat_descr}},function(err,doc){
+      if(err){
+        console.log('err: ', err);
+      }else{
+        console.log("Found");
+        res.redirect('/view_categories');
+      }
+    });
+  }else{
   const category = new Category({
     name: cat_name,
     description: cat_descr
@@ -192,6 +206,18 @@ app.post('/add_cat', function(req,res){
       res.redirect('/view_categories');
     }
   });
+}
+});
+
+app.get('/admin_view_nominees', function(req,res){
+  protect(res);
+  Category.find(function(err, nomineesFromDB){
+    if(err){
+      console.log(err);
+    }else{
+      res.render('view_nominees_admin', {nominees:nomineesFromDB});
+  }});
+  
 });
 
 app.get('/add_nominee', function(req,res){

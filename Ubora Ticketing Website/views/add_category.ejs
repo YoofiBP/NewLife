@@ -8,6 +8,7 @@
   <div class="form-group">
     <label for="cat_name">Category Name</label>
     <% if(typeof catinfo !== 'undefined' ){%>
+      <input type="hidden" name="categoryId" value="<%=catinfo._id%>">
       <input type="text" class="form-control" id="cat_name" name="cat_name" aria-describedby="fnameField" placeholder="Enter Category Name" value="<%=catinfo.name%>">
     <%}else{%>
     <input type="text" class="form-control" id="cat_name" name="cat_name" aria-describedby="fnameField" placeholder="Enter Category Name">
