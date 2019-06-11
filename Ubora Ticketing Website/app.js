@@ -45,16 +45,18 @@ mongoose.connect("mongodb://localhost:27017/uboraDB", { useNewUrlParser: true })
 
 let models = [];
 
+const NomineeSchema = new mongoose.Schema({
+  name: String, 
+  year_group: String, 
+  major: String,
+  image_source: String,
+  description: String
+});
+
 const CategorySchema = new mongoose.Schema({
   name: String,
   description: String,
-  nominees: [{
-    name: String, 
-    year_group: String, 
-    major: String,
-    image_source: String,
-    description: String
-  }]
+  nominees: [NomineeSchema]
 });
 
 const EventSchema = new mongoose.Schema({
@@ -78,6 +80,7 @@ const Event = new mongoose.model('Event', EventSchema);
 models['Event'] = Event;
 const Attendee = new mongoose.model('Attendee', AttendeeSchema);
 models['Attendee'] = Attendee;
+const Nominee = new mongoose.model('Nominee', NomineeSchema);
 
 
 let db = firebase.firestore();
@@ -256,20 +259,31 @@ app.get('/add_nominee/:categoryId/:id', function(req,res){
 });
 
 app.post('/add_nominee', upload.single('nom_image'), function(req,res){
-  let nomId = req.body
+  let nomId = req.body.nominee_id;
+  let category = req.body.nom_cat;
+  let  name = req.body.nome_name;
+  let year_group = req.body.nom_yg;
+  let major = req.body.major;
+  let image_source = `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname}`;
+  let description = req.body.nom_descr;
+
   const file = req.file;
   const gcsname = uuidv4() + file.originalname;
 
   const files = bucket.file(gcsname);
-  
-  let nominee = {
-    name: req.body.nom_name,
-    year_group: req.body.nom_yg,
-    major : req.body.nom_major,
-    image_source: `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname}`,
-    description : req.body.nom_descr
-  };
+  const nominee = new Nominee({
+    name: name,
+    year_group: year_group,
+    major : major,
+    image_source: image_source,
+    description : description
+  });
 
+  if(nomId !== undefined){
+    
+  }else{
+
+  }
   Category.updateOne({name: req.body.nom_cat}, {$push: {nominees: nominee}},function(err){
     if(err){
       console.log(err);
