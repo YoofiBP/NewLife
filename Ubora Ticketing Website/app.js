@@ -14,6 +14,7 @@ const storage = new Storage({
   keyFilename: GOOGLE_CLOUD_KEYFILE
 });
 
+const port = 3000;
 const bucket = storage.bucket(CLOUD_BUCKET);
 
 const express = require('express');
@@ -40,8 +41,15 @@ messagingSenderId: process.env.MESSAGING_SENDER_ID,
 appId: process.env.APP_ID
 });
 
+const dbPassword = process.env.DB_PASSWORD;
+const dbUserName = process.env.DB_USERNAME;
+const mongoConnection = "mongodb+srv://"+dbUserName+":"+dbPassword+"@cluster0-b5vo0.mongodb.net/uboraDB";
+mongoose.connect(mongoConnection, { useNewUrlParser: true });
+const connection = mongoose.connection;
+connection.once('open', function() {
+    console.log("MongoDB database connection established successfully");
+});
 
-mongoose.connect("mongodb://localhost:27017/uboraDB", { useNewUrlParser: true });
 
 let models = [];
 
@@ -259,16 +267,18 @@ app.get('/add_nominee/:categoryId/:id', function(req,res){
 });
 
 app.post('/add_nominee', upload.single('nom_image'), function(req,res){
-  let nomId = req.body.nominee_id;
-  let category = req.body.nom_cat;
-  let  name = req.body.nome_name;
-  let year_group = req.body.nom_yg;
-  let major = req.body.major;
-  let image_source = `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname}`;
-  let description = req.body.nom_descr;
+  
 
   const file = req.file;
   const gcsname = uuidv4() + file.originalname;
+
+  let nomId = req.body.nominee_id;
+  let category = req.body.nom_cat;
+  let  name = req.body.nom_name;
+  let year_group = req.body.nom_yg;
+  let major = req.body.nom_major;
+  let image_source = `https://storage.googleapis.com/${CLOUD_BUCKET}/${gcsname}`;
+  let description = req.body.nom_descr;
 
   const files = bucket.file(gcsname);
   const nominee = new Nominee({
@@ -434,6 +444,6 @@ app.get('/delete/:model/:id', function(req,res){
   })
 });
 
-app.listen(3000, function(){
-  console.log("Server up and running on port 3000");
+app.listen(process.env.PORT || port, function(){
+  console.log("Server up and running on port "+port);
 });
