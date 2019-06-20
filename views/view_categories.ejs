@@ -1,0 +1,30 @@
+<%- include("partials/header"); -%>
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div class=row>
+    <%- include("partials/admin_sidebar"); -%>
+
+<div class="col-lg-8">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th colspan="2">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+  <% categoriesRegistered.forEach(function(category){%>
+    <tr>
+  <td><%=category.name%></td>
+  <td><%=category.description%></td>
+  <td><a href="/delete/category/<%=category._id%>" role="button" name="button" class="btn btn-outline-light">Delete</a></td>
+  <td><a href="/add_cat/<%=category._id%>" role="button" class="btn btn-outline-light">Edit</a></td>
+  </tr>
+  <%})%>
+  </tbody>
+  </table>
+</div>
+</div>
+</div>
+
+<%- include("partials/footer"); -%>

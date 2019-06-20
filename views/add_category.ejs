@@ -1,0 +1,30 @@
+<%- include("partials/header"); -%>
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="row">
+        <%- include("partials/admin_sidebar"); -%>
+
+        <div class="col-lg-8">
+<form action="/add_cat" method="post">
+  <div class="form-group">
+    <label for="cat_name">Category Name</label>
+    <% if(typeof catinfo !== 'undefined' ){%>
+      <input type="hidden" name="categoryId" value="<%=catinfo._id%>">
+      <input type="text" class="form-control" id="cat_name" name="cat_name" aria-describedby="fnameField" placeholder="Enter Category Name" value="<%=catinfo.name%>">
+    <%}else{%>
+    <input type="text" class="form-control" id="cat_name" name="cat_name" aria-describedby="fnameField" placeholder="Enter Category Name">
+    <%}%>
+  </div>
+  <div class="form-group">
+    <label for="cat_descr">Category Description</label>
+    <% if(typeof catinfo !== 'undefined' ){%>
+      <input type="text" class="form-control" id="cat_descr" name="cat_descr" aria-describedby="fnameField" placeholder="Enter Category Description" value="<%=catinfo.description%>">
+    <%}else{%>
+      <input type="text" class="form-control" id="cat_descr" name="cat_descr" aria-describedby="fnameField" placeholder="Enter Category Description">
+    <%}%>
+  </div>
+  <button type="submit" class="btn btn-outline-light">Confirm Changes</button>
+</form>
+</div>
+</div>
+</div>
+<%- include("partials/footer"); -%>

@@ -1,0 +1,71 @@
+<%- include("partials/header"); -%>
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="row">
+        <%- include("partials/admin_sidebar"); -%>
+
+      <div class="col-lg-8">
+<form action="/add_nominee" method="post" enctype="multipart/form-data">
+  <% if(typeof nomineeInfo !== 'undefined'){%>
+    <input type="hidden" value="<%=nomineeInfo._id%>"" name="nominee_id">
+    <div class="form-group">
+      <label for="nom_name">Nominee Name</label>
+      <input value="<%=nomineeInfo.name%>" type="text" class="form-control" id="nom_name" name="nom_name" aria-describedby="fnameField" placeholder="Enter Nominee Name">
+    </div>
+    <div class="form-group">
+      <label for="nom_major">Nominee Major</label>
+      <input value="<%=nomineeInfo.major%>" type="text" class="form-control" id="nom_major" name="nom_major" aria-describedby="lnameField" placeholder="Enter Nominee Major">
+    </div>
+    <div class="form-group">
+      <label for="nom_yg">Nominee Year Group</label>
+      <input value="<%=nomineeInfo.year_group%>"type="text" class="form-control" id="nom_yg" name="nom_yg" aria-describedby="lnameField" placeholder="Enter Nominee Year Group">
+    </div>
+    <div class="form-group">
+        <label for="nom_descr">Nominee Description</label>
+        <textarea value=""rows="5" class="form-control" id="nom_descr" name="nom_descr" aria-describedby="lnameField" placeholder="Enter Nominee Description" maxlength="450"><%=nomineeInfo.description%></textarea>
+        <small class="form-text text-muted">Keep description to 450 characters</small>
+      </div>
+    <div class="form-group">
+      <label for="cat_image">Nominee Image</label>
+      <input type="file" class="form-control-file" id="nom_image" name="nom_image">
+    </div>
+
+  <%}else{%>
+
+  <div class="form-group">
+    <label for="nom_name">Nominee Name</label>
+    <input type="text" class="form-control" id="nom_name" name="nom_name" aria-describedby="fnameField" placeholder="Enter Nominee Name">
+  </div>
+  <div class="form-group">
+    <label for="nom_major">Nominee Major</label>
+    <input type="text" class="form-control" id="nom_major" name="nom_major" aria-describedby="lnameField" placeholder="Enter Nominee Major">
+  </div>
+  <div class="form-group">
+    <label for="nom_yg">Nominee Year Group</label>
+    <input type="text" class="form-control" id="nom_yg" name="nom_yg" aria-describedby="lnameField" placeholder="Enter Nominee Year Group">
+  </div>
+  <div class="form-group">
+      <label for="nom_descr">Nominee Description</label>
+      <textarea rows="5" class="form-control" id="nom_descr" name="nom_descr" aria-describedby="lnameField" placeholder="Enter Nominee Description" maxlength="450"></textarea>
+      <small class="form-text text-muted">Keep description to 450 characters</small>
+    </div>
+  <div class="form-group">
+    <label for="cat_image">Nominee Image</label>
+    <input type="file" class="form-control-file" id="nom_image" name="nom_image">
+  </div>
+  <%}%>
+  <div class="form-group">
+    <label for="nom_cat">Nominee Category</label>
+    <select name="nom_cat" id="">
+        <option value="0">Select Category</option>
+        <% categories.forEach(category=>{%>
+            <option value="<%=category.name%>"><%=category.name%></option>
+        <%})%>
+    </select>
+  </div>
+  
+  <button type="submit" class="btn btn-outline-light">Register</button>
+</form>
+</div>
+</div>
+</div>
+<%- include("partials/footer"); -%>

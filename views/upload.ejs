@@ -1,0 +1,10 @@
+<%- include("partials/header"); -%>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+            <label for="cat_image">Nominee Image</label>
+            <input type="file" class="form-control-file" id="nom_image" name="nom_image">
+    </div>
+    <input type="text" name="input1"/>
+          <button type="submit">Submit</button>
+</form>
+<%- include("partials/footer"); -%>

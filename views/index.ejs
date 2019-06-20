@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="css/homepage.css">
+<%- include("partials/header"); -%>
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+     <!-- <video autoplay muted loop id="myVideo">
+      <source src="https://www.youtube.com/embed/8SgmWihcCYM" type="video/mp4"/>
+     </video> -->
+  <div class="row justify-content-center align-items-center">
+      <img class="header-image" src="<%=eventInfo[0].header_image_src%>"/>
+  </div>
+  <div class="row justify-content-center align-items-center">
+      <h1 id="countdown" class="display-1 text-light"></h1>
+  </div>
+  <div class="row justify-content-center align-items-center">
+      <ul class="list-inline">
+          <% if(eventInfo[0].show_location==true){%>
+            <li class="list-inline-item lead"><%=eventInfo[0].location%></li>
+          <%}%>
+      
+          <%let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };%>
+          <% let date = new Date(eventInfo[0].date)%>
+          <li class="list-inline-item lead" name="<%=eventInfo[0].date%>"><%=date.toLocaleDateString("en-US", options)%></li>
+          <li class="list-inline-item lead"><%=eventInfo[0].time%> GMT</li>
+        </ul>
+      </div>
+      <div class="row justify-content-center align-items-center">
+    
+    <a role="button" name="button" class="btn btn-outline-light" href="/view_nominees">Awards</a>
+    <a role="button" name="button" class="btn btn-outline-light" href="/get_ticket">Ticketing</a>
+  
+</div>
+</div>
+
+<%- include("partials/footer"); -%>

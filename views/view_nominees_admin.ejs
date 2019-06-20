@@ -1,0 +1,38 @@
+<%- include("partials/header"); -%>
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+   
+  <div class="row">
+    <%- include("partials/admin_sidebar"); -%>
+<div class="col-lg-10">
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Name</th>
+        <th>Year Group</th>
+        <th>Major</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+            <% nominees.forEach(function(category){%>
+    <tr>
+  <td rowspan="4"><%=category.name%></td>
+  <%category.nominees.forEach(function(nominee){%>
+    <td><%=nominee.name%></td>
+    <td><%=nominee.year_group%></td>
+    <td><%=nominee.major%></td>
+    
+    <td><a href="/delete/nominee/<%=nominee._id%>" role="button" name="button" class="btn btn-outline-light">Delete</a></td>
+  <td><a href="/add_nominee/<%=category._id%>/<%=nominee._id%>" role="button" name="button" class="btn btn-outline-light">Edit</a></td>
+  </tr>
+  <tr>
+<%})%>
+  <%})%>
+  </tbody>
+  </table>
+</div>
+</div>
+</div>
+
+<%- include("partials/footer"); -%>

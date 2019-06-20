@@ -1,0 +1,34 @@
+<%- include("partials/header"); -%>
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class="row justify-content-center">
+  <a href="/">Home</a>
+  &nbsp
+  &nbsp
+  &nbsp
+
+  <a href="/view_nominees">Awards</a>
+</div>  
+  <div class="row justify-content-center">
+<form action="/get_ticket" method="post" class="col-lg-8">
+  <div class="form-group">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameField" placeholder="Enter First Name">
+  </div>
+  <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameField" placeholder="Enter Last Name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailField" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">Preferably Gmail.</small>
+  </div>
+  <div class="form-group">
+    <label for="yearGroup">Year Group</label>
+    <input type="text" class="form-control" id="yearGroup" name="yearGroup" aria-describedby="ygField" placeholder="Enter Year Group">
+  </div>
+  <button type="submit" class="btn btn-outline-light">Register</button>
+</form>
+</div>
+</div>
+<%- include("partials/footer"); -%>
