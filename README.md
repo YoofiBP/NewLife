@@ -1,4 +1,4 @@
-# Web Application Summary
+# Ubora Web Application Version 2 Summary
 The web application allows the [Ashesi Student Council](https://ashesi.edu.gh) to manage ticketing and Awards information for the [Annual Ubora Awards.](https://www.ashesi.edu.gh/stories-and-events/stories/3308-ashesi-student-councils-9th-ubora-awards-a-time-to-celebrate-excellence.html) and students to view event information as well as nominees and categories.
 
 ## Motivation 
