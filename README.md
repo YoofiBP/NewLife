@@ -1,7 +1,16 @@
 # Web Application Summary
-The website allows the [Ashesi Student Council](https://ashesi.edu.gh) to manage ticketing and Awards information for the Annual Ubora Awards. Students can:
+The web application allows the [Ashesi Student Council](https://ashesi.edu.gh) to manage ticketing and Awards information for the [Annual Ubora Awards.](https://www.ashesi.edu.gh/stories-and-events/stories/3308-ashesi-student-councils-9th-ubora-awards-a-time-to-celebrate-excellence.html) and students to view event information as well as nominees and categories.
+
+## Motivation 
+The Ubora Awards is an annual event held by the Ashesi Student Council to celebrate students who have performed excellently in various various aspects of their school life. The web application enables the Student Council to :
+
+* Publish event information
+* Advertise nominees for the various categories
+* Handle attendee registration to attend the event
+* Send tickets to registered attendees using Eventbrite
+
+Students can:
 * view nominees for the various categories 
-* cast their vote 
 * register for tickets through the web application
 
 Through the application Administrators can 
@@ -10,21 +19,6 @@ Through the application Administrators can
 * approve ticket registrations (it should list people who have paid so that the inivite can be sent)
 * edit key event information
 
-The web application uses Firebase for Authentication and Storage. 
-
-
-## How to use the Application
-
-**Features to add**
-
-* Upload Images from site to Cloud Database
-* Store reference to uploaded image
-* View Nominees From Current Year by Category
-* Give Specifications for Images to upload for best experience
-* Create your own barcode reader and attendance tracker (useability issues like what platform will the app run on and will it be a web browser)
-
-A potential solution to viewing nominees to the change how the data is stored rather. 
-In nominees datastore
-Store the name of the category and next the nominees inside the category as an array
-
-Or remove nominees altogether and store everything in category
+## Built With 
+- Express, NodeJS
+- HTML, CSS, JavaScript
