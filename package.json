@@ -4,7 +4,7 @@
   "description": "A web application for the Ashesi Ubora Awards",
   "main": "app.js",
   "engine": {
-    "node": "10.16.3"
+    "node": "10.x"
   },
   "scripts": {
     "start": "node app.js"

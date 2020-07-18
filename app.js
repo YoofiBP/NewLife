@@ -14,7 +14,7 @@ const storage = new Storage({
   keyFilename: GOOGLE_CLOUD_KEYFILE,
 });
 
-const port = 5000;
+const port = process.env.PORT || 4000;
 const bucket = storage.bucket(CLOUD_BUCKET);
 
 const express = require("express");
