@@ -1,35 +1,85 @@
 <%- include("partials/header"); -%>
-<form action="/edit_info" method="POST" enctype="multipart/form-data">
-   <div class="form-group">
-    <label for="ev_date">Event Date</label>
-    <input type="date" class="form-control" name="ev_date" id="ev_date" value="<%=eventInfo[0].date%>">
-  </div>
+<div class="container-fluid d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class="row">
+    <%- include("partials/admin_sidebar"); -%>
 
-  <div class="form-group">
-        <label for="ev_time">Event Time</label>
-        <input type="time" class="form-control" id="ev_time" name="ev_time" value="<%=eventInfo[0].time%>">
-      </div>
-      <div class="form-group">
-            <label for="ev_location">Event Location</label>
-            <input type="text" class="form-control" id="ev_location" name="ev_location" value="<%=eventInfo[0].location%>">            
-          </div>
-          <div class="custom-control custom-switch">
-            <% if(eventInfo[0].show_location == true){%>
-              <input type="checkbox" class="custom-control-input" name="showLocation" id="customSwitch1" checked>
-            <%}else{%>
-              <input type="checkbox" class="custom-control-input" name="showLocation" id="customSwitch1">
-            <%}%>
-                <label class="custom-control-label" for="customSwitch1">Show Location?</label>
-              </div><br>
-              <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="headerImg" id="customFile">
-                    <label class="custom-file-label" for="customFile">Upload Header Logo</label>
-                    <small class="form-text text-muted">For best experience, Logo should be at least x pixels wide and y pixels high</small>
-                  </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <br>
-                </div>
-</form>
+    <div class="col-lg-8">
+      <form action="/edit_info" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="ev_date">Event Date</label>
+          <input
+            type="date"
+            class="form-control"
+            name="ev_date"
+            id="ev_date"
+            value="<%=eventInfo[0].date%>"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="ev_time">Event Time</label>
+          <input
+            type="time"
+            class="form-control"
+            id="ev_time"
+            name="ev_time"
+            value="<%=eventInfo[0].time%>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="ev_location">Event Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="ev_location"
+            name="ev_location"
+            value="<%=eventInfo[0].location%>"
+          />
+        </div>
+        <div class="custom-control custom-switch">
+          <% if(eventInfo[0].show_location == true){%>
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            name="showLocation"
+            id="customSwitch1"
+            checked
+          />
+          <%}else{%>
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            name="showLocation"
+            id="customSwitch1"
+          />
+          <%}%>
+          <label class="custom-control-label" for="customSwitch1"
+            >Show Location?</label
+          >
+        </div>
+        <br />
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            name="headerImg"
+            id="customFile"
+          />
+          <label class="custom-file-label" for="customFile"
+            >Upload Header Logo</label
+          >
+          <small class="form-text text-muted"
+            >For best experience, Logo should be at least x pixels wide and y
+            pixels high</small
+          >
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <br />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <%- include("partials/footer"); -%>
